@@ -20,9 +20,9 @@ final class MigrateCommand extends MigrateTemplate
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $output->writeln(
-                $this->migrations->getOnSql()
-            );
+            $this->pdo->prepare($this->migrations->getOnSql())->execute();
+            
+            $output->writeln("Migration applied!");
     
             return 0;
         } catch (\Throwable $exception) {
