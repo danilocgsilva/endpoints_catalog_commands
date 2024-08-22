@@ -7,6 +7,7 @@ namespace Danilocgsilva\EndpointsCatalogCommands;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Danilocgsilva\EndpointsCatalog\Migrations;
 
 final class MigrateCommand extends Command
 {
@@ -20,9 +21,22 @@ final class MigrateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln("Lets migrate!");
-
-        return 0;
+        try {
+            /** @var Migrations $migrations */
+            $migrations = new Migrations();
+            
+            $output->writeln(
+                $migrations->getOnSql()
+            );
+    
+            return 0;
+        } catch (\Throwable $exception) {
+            $output->writeln(
+                get_class($exception) . ": " .
+                $exception->getMessage()
+            );
+            return 1;
+        }
     }
 }
 
