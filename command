@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Danilocgsilva\EndpointsCatalogCommands\MigrateCommand;
+use Danilocgsilva\EndpointsCatalogCommands\RollbackMigrateCommand;
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
@@ -25,6 +26,7 @@ try {
     $application = $container->get(Application::class);
 
     $application->add($container->get(MigrateCommand::class));
+    $application->add($container->get(RollbackMigrateCommand::class));
 
     exit($application->run());
 } catch (Throwable $exception) {
