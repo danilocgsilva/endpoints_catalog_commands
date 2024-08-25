@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Danilocgsilva\EndpointsCatalogCommands\Commands;
 
-use Danilocgsilva\EndpointsCatalog\Models\Path;
-use Danilocgsilva\EndpointsCatalog\Repositories\PathRepository;
+use Danilocgsilva\EndpointsCatalog\Models\Dns;
 use Danilocgsilva\EndpointsCatalogCommands\AskTrait;
+use Danilocgsilva\EndpointsCatalogCommands\ConnectTrait;
+use Danilocgsilva\EndpointsCatalogCommands\CommandTemplate;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Danilocgsilva\EndpointsCatalogCommands\CommandTemplate;
-use Danilocgsilva\EndpointsCatalogCommands\ConnectTrait;
+use Danilocgsilva\EndpointsCatalog\Repositories\DnsRepository;
 
-
-final class InsertEndpointCommand extends CommandTemplate
+class AddDnsCommand extends CommandTemplate
 {
     use ConnectTrait;
     use AskTrait;
@@ -26,8 +25,8 @@ final class InsertEndpointCommand extends CommandTemplate
     {
         parent::configure();
 
-        $this->setName('insert-endpoint');
-        $this->setDescription('Saves an endpoint.');
+        $this->setName('add-dns');
+        $this->setDescription('Register a dns.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -36,18 +35,15 @@ final class InsertEndpointCommand extends CommandTemplate
         $this->fillInputOutput($input, $output);
         
         try {
-            (new PathRepository($this->pdo))->save(
-                (new Path())->setPath(
-                    ($pathString = $this->getAskAnswer('Write the path'))
-                )
-            );
+            $dnsRepository = new DnsRepository($this->pdo);
+            $dns = new Dns();
+            $dnsString = $this->getAskAnswer('Write the dns');
+            $dns->setDns($dnsString);
+            $dnsRepository->save($dns);
             
-            $output->writeln("You saved {$pathString}.");
-    
             return 0;
         } catch (\Throwable $exception) {
             return $this->caughtException($exception, $output);
         }
     }
 }
-
