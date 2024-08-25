@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-use Danilocgsilva\EndpointsCatalogCommands\Commands\MigrateCommand;
-use Danilocgsilva\EndpointsCatalogCommands\Commands\RollbackMigrateCommand;
-use Danilocgsilva\EndpointsCatalogCommands\Commands\InsertEndpoint;
+use Danilocgsilva\EndpointsCatalogCommands\Commands\{
+    MigrateCommand, RollbackMigrateCommand, InsertEndpointCommand,
+    ListPathsCommand
+};
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
@@ -28,7 +29,8 @@ try {
 
     $application->add($container->get(MigrateCommand::class));
     $application->add($container->get(RollbackMigrateCommand::class));
-    $application->add($container->get(InsertEndpoint::class));
+    $application->add($container->get(InsertEndpointCommand::class));
+    $application->add($container->get(ListPathsCommand::class));
 
     exit($application->run());
 } catch (Throwable $exception) {

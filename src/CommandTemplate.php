@@ -8,14 +8,12 @@ use Symfony\Component\Console\Command\Command;
 use Throwable;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class MigrateTemplate extends Command
+class CommandTemplate extends Command
 {
     use ConnectTrait;
 
     public function caughtException(Throwable $exception, OutputInterface $output): int
     {
-        $this->connect();
-        
         $output->writeln(
             get_class($exception) . ": " .
             $exception->getMessage()

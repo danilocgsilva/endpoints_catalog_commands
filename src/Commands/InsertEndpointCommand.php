@@ -9,12 +9,11 @@ use Danilocgsilva\EndpointsCatalog\Repositories\PathRepository;
 use Danilocgsilva\EndpointsCatalogCommands\AskTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
-use Danilocgsilva\EndpointsCatalogCommands\MigrateTemplate;
+use Danilocgsilva\EndpointsCatalogCommands\CommandTemplate;
 use Danilocgsilva\EndpointsCatalogCommands\ConnectTrait;
 
 
-final class InsertEndpoint extends MigrateTemplate
+final class InsertEndpointCommand extends CommandTemplate
 {
     use ConnectTrait;
     use AskTrait;
@@ -37,10 +36,11 @@ final class InsertEndpoint extends MigrateTemplate
         $this->fillInputOutput($input, $output);
         
         try {
-            $pathString = $this->getAskAnswer('Write the path');
-
-            $path = (new Path())->setPath($pathString);
-            (new PathRepository($this->pdo))->save($path);
+            (new PathRepository($this->pdo))->save(
+                (new Path())->setPath(
+                    ($pathString = $this->getAskAnswer('Write the path'))
+                )
+            );
             
             $output->writeln("You saved {$pathString}.");
     
