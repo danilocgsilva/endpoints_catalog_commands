@@ -31,5 +31,6 @@ try {
     exit($application->run());
 } catch (Throwable $exception) {
     echo $exception->getMessage();
+    echo $exception->getTraceAsString();
     exit(1);
 }

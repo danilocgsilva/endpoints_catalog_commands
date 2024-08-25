@@ -15,25 +15,26 @@ class MigrateTemplate extends Command
     protected Migrations $migrations;
 
     protected PDO $pdo;
-    
-    public function __construct(?string $name = null)
+
+    public function caughtException(Throwable $exception, OutputInterface $output): int
     {
-        parent::__construct($name);
+        $this->connect();
+        
+        $output->writeln(
+            get_class($exception) . ": " .
+            $exception->getMessage()
+        );
+        return 1;
+    }
+
+    private function connect()
+    {
         $this->migrations = new Migrations();
         $this->pdo = new PDO(
             sprintf("mysql:host=%s;dbname=%s", getenv('DB_ENDPOINTSCATALOG_HOST'), getenv('DB_ENDPOINTSCATALOG_NAME')),
             getenv('DB_ENDPOINTSCATALOG_USER'),
             getenv('DB_ENDPOINTSCATALOG_PASSWORD')
         );
-    }
-
-    public function caughtException(Throwable $exception, OutputInterface $output): int
-    {
-        $output->writeln(
-            get_class($exception) . ": " .
-            $exception->getMessage()
-        );
-        return 1;
     }
 }
 
