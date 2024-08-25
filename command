@@ -19,6 +19,17 @@ if ($env) {
     $_ENV['APP_ENV'] = $env;
 }
 
+class AddCommand
+{
+    public function __construct(private $application, private $container) {}
+    
+    public function add(string $commandName): self
+    {
+        $this->application->add($this->container->get($commandName));
+        return $this;
+    }
+}
+
 /** @var ContainerInterface $container */
 $container = (new ContainerBuilder())
     ->build();
@@ -27,12 +38,13 @@ try {
     /** @var Application $application */
     $application = $container->get(Application::class);
 
-    $application->add($container->get(MigrateCommand::class));
-    $application->add($container->get(RollbackMigrateCommand::class));
-    $application->add($container->get(InsertEndpointCommand::class));
-    $application->add($container->get(ListPathsCommand::class));
-    $application->add($container->get(ListDnsCommand::class));
-    $application->add($container->get(AddDnsCommand::class));
+    (new AddCommand($application, $container))
+        ->add(MigrateCommand::class)
+        ->add(RollbackMigrateCommand::class)
+        ->add(InsertEndpointCommand::class)
+        ->add(ListPathsCommand::class)
+        ->add(AddDnsCommand::class)
+        ->add(ListDnsCommand::class);
 
     exit($application->run());
 } catch (Throwable $exception) {
