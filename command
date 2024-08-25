@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 use Danilocgsilva\EndpointsCatalogCommands\Commands\{
-    MigrateCommand, RollbackMigrateCommand, InsertEndpointCommand,
-    ListPathsCommand, ListDnsCommand, AddDnsCommand
+    MigrateCommand, RollbackMigrateCommand, SetEndpointCommand,
+    ListPathsCommand, ListDnsCommand, AddDnsCommand,
+    AddPathCommand
 };
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
@@ -41,10 +42,12 @@ try {
     (new AddCommand($application, $container))
         ->add(MigrateCommand::class)
         ->add(RollbackMigrateCommand::class)
-        ->add(InsertEndpointCommand::class)
         ->add(ListPathsCommand::class)
         ->add(AddDnsCommand::class)
-        ->add(ListDnsCommand::class);
+        ->add(ListDnsCommand::class)
+        ->add(AddPathCommand::class)
+        ->add(SetEndpointCommand::class)
+    ;
 
     exit($application->run());
 } catch (Throwable $exception) {

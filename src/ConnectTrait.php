@@ -13,7 +13,7 @@ trait ConnectTrait
 
     protected PDO $pdo;
 
-    private function connect()
+    protected function connect()
     {
         $this->migrations = new Migrations();
         $this->pdo = new PDO(

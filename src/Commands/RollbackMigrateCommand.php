@@ -6,8 +6,7 @@ namespace Danilocgsilva\EndpointsCatalogCommands\Commands;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Danilocgsilva\EndpointsCatalogCommands\CommandTemplate;
-use Danilocgsilva\EndpointsCatalogCommands\ConnectTrait;
+use Danilocgsilva\EndpointsCatalogCommands\{CommandTemplate, ConnectTrait};
 use Throwable;
 
 final class RollbackMigrateCommand extends CommandTemplate

@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Danilocgsilva\EndpointsCatalogCommands\Commands;
 
-use Danilocgsilva\EndpointsCatalog\Models\Dns;
+use Danilocgsilva\EndpointsCatalog\Repositories\PathRepository;
 use Danilocgsilva\EndpointsCatalogCommands\{
     AskTrait, ConnectTrait, CommandTemplate
 };
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Danilocgsilva\EndpointsCatalog\Repositories\DnsRepository;
+use Danilocgsilva\EndpointsCatalog\Models\Path;
+use Symfony\Component\Console\{
+    Input\InputInterface, 
+    Output\OutputInterface
+};
 
-class AddDnsCommand extends CommandTemplate
+class AddPathCommand extends CommandTemplate
 {
     use ConnectTrait;
     use AskTrait;
@@ -25,8 +27,8 @@ class AddDnsCommand extends CommandTemplate
     {
         parent::configure();
 
-        $this->setName('add-dns');
-        $this->setDescription('Register a dns.');
+        $this->setName('add-path');
+        $this->setDescription('Register a path.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -35,11 +37,11 @@ class AddDnsCommand extends CommandTemplate
         $this->fillInputOutput($input, $output);
         
         try {
-            $dnsRepository = new DnsRepository($this->pdo);
-            $dns = new Dns();
-            $dnsString = $this->getAskAnswer('Write the dns');
-            $dns->setDns($dnsString);
-            $dnsRepository->save($dns);
+            $pathRepository = new PathRepository($this->pdo);
+            $path = new Path();
+            $pathString = $this->getAskAnswer('Write the path');
+            $path->setPath($pathString);
+            $pathRepository->save($path);
             
             return 0;
         } catch (\Throwable $exception) {
