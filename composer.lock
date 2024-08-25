@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "090d96286d8a7ba6071f0f7995879859",
+    "content-hash": "b074bb0624e1989c21b256be5006c52d",
     "packages": [
         {
             "name": "danilocgsilva/class_to_sql_schema_script",
@@ -44,20 +44,23 @@
         },
         {
             "name": "danilocgsilva/endpoints_catalog",
-            "version": "0.1.2",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilocgsilva/endpoints_catalog.git",
-                "reference": "809fa575902c1f3c96f4c4bd0eb9561d70ce7d1d"
+                "reference": "d30461d5a8631d7af63df503f4b90ed316d05057"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilocgsilva/endpoints_catalog/zipball/809fa575902c1f3c96f4c4bd0eb9561d70ce7d1d",
-                "reference": "809fa575902c1f3c96f4c4bd0eb9561d70ce7d1d",
+                "url": "https://api.github.com/repos/danilocgsilva/endpoints_catalog/zipball/d30461d5a8631d7af63df503f4b90ed316d05057",
+                "reference": "d30461d5a8631d7af63df503f4b90ed316d05057",
                 "shasum": ""
             },
             "require": {
                 "danilocgsilva/class_to_sql_schema_script": "^1.7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.3"
             },
             "type": "library",
             "autoload": {
@@ -77,9 +80,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilocgsilva/endpoints_catalog/issues",
-                "source": "https://github.com/danilocgsilva/endpoints_catalog/tree/0.1.2"
+                "source": "https://github.com/danilocgsilva/endpoints_catalog/tree/1.0.0"
             },
-            "time": "2024-08-22T16:36:29+00:00"
+            "time": "2024-08-23T20:38:06+00:00"
         },
         {
             "name": "laravel/serializable-closure",

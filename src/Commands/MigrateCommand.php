@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Danilocgsilva\EndpointsCatalogCommands;
+namespace Danilocgsilva\EndpointsCatalogCommands\Commands;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use PDO;
+use Danilocgsilva\EndpointsCatalogCommands\MigrateTemplate;
+use Danilocgsilva\EndpointsCatalogCommands\ConnectTrait;
 
 final class MigrateCommand extends MigrateTemplate
 {

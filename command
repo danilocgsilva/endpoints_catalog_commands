@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-use Danilocgsilva\EndpointsCatalogCommands\MigrateCommand;
-use Danilocgsilva\EndpointsCatalogCommands\RollbackMigrateCommand;
+use Danilocgsilva\EndpointsCatalogCommands\Commands\MigrateCommand;
+use Danilocgsilva\EndpointsCatalogCommands\Commands\RollbackMigrateCommand;
+use Danilocgsilva\EndpointsCatalogCommands\Commands\InsertEndpoint;
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
@@ -27,6 +28,7 @@ try {
 
     $application->add($container->get(MigrateCommand::class));
     $application->add($container->get(RollbackMigrateCommand::class));
+    $application->add($container->get(InsertEndpoint::class));
 
     exit($application->run());
 } catch (Throwable $exception) {

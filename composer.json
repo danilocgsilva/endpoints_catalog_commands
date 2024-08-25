@@ -16,6 +16,6 @@
     "require": {
         "symfony/console": "^7.1",
         "php-di/php-di": "^7.0",
-        "danilocgsilva/endpoints_catalog": "^0.1.0"
+        "danilocgsilva/endpoints_catalog": "^1.0.0"
     }
 }
