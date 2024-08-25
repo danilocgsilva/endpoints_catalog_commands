@@ -6,9 +6,12 @@ namespace Danilocgsilva\EndpointsCatalogCommands;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use PDO;
 
 final class MigrateCommand extends MigrateTemplate
 {
+    use ConnectTrait;
+
     protected function configure(): void
     {
         parent::configure();
@@ -19,6 +22,8 @@ final class MigrateCommand extends MigrateTemplate
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->connect();
+        
         try {
             $this->pdo->prepare($this->migrations->getOnSql())->execute();
             

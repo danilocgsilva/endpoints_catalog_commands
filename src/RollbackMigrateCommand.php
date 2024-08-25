@@ -10,6 +10,8 @@ use Throwable;
 
 final class RollbackMigrateCommand extends MigrateTemplate
 {
+    use ConnectTrait;
+    
     protected function configure(): void
     {
         parent::configure();
@@ -20,6 +22,8 @@ final class RollbackMigrateCommand extends MigrateTemplate
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->connect();
+        
         try {
             $this->pdo->prepare($this->migrations->getRollbackSql())->execute();
 
