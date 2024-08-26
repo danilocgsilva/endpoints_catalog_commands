@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Danilocgsilva\EndpointsCatalogCommands\Commands\{
     MigrateCommand, RollbackMigrateCommand, SetEndpointCommand,
     ListPathsCommand, ListDnsCommand, AddDnsCommand,
-    AddPathCommand
+    AddPathCommand, ListEndpointsCommand
 };
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
@@ -47,6 +47,7 @@ try {
         ->add(ListDnsCommand::class)
         ->add(AddPathCommand::class)
         ->add(SetEndpointCommand::class)
+        ->add(ListEndpointsCommand::class)
     ;
 
     exit($application->run());

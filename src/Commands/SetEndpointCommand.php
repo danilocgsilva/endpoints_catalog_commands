@@ -112,7 +112,9 @@ class SetEndpointCommand extends CommandTemplate
      */
     private function pickDns(string $dnsChoice, array $dnsList): Dns
     {
-        return array_filter($dnsList, fn ($entry) => $entry->dns === $dnsChoice)[0];
+        return array_values(
+            array_filter($dnsList, fn ($entry) => $entry->dns === $dnsChoice)
+        )[0];
     }
 
     /**
@@ -120,8 +122,10 @@ class SetEndpointCommand extends CommandTemplate
      * @param array<Path> $pathList
      * @return Path
      */
-    private function pickPath(string $pathChoise, array $pathList): Path
+    private function pickPath(string $pathChoice, array $pathList): Path
     {
-        return array_filter($pathList, fn ($entry) => $entry->path === $pathChoise)[0];
+        return array_values(
+            array_filter($pathList, fn ($entry) => $entry->path === $pathChoice)
+        )[0];
     }
 }
