@@ -26,7 +26,7 @@ final class MigrateCommand extends CommandTemplate
         $this->connect();
         
         try {
-            $this->pdo->prepare($this->migrations->getOnSql())->execute();
+            $this->pdo->prepare($this->migrations->getString())->execute();
             
             $output->writeln("Migration applied!");
     

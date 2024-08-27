@@ -17,8 +17,10 @@ trait ConnectTrait
     protected function connect()
     {
         $migrationManager = new MigrationManager();
+
+        $nextMigrationName = $migrationManager->getNextMigrationClass();
         
-        $this->migrations = new $migrationManager->getNextMigrationClass();
+        $this->migrations = new $nextMigrationName;
         $this->pdo = new PDO(
             sprintf("mysql:host=%s;dbname=%s", getenv('DB_ENDPOINTSCATALOG_HOST'), getenv('DB_ENDPOINTSCATALOG_NAME')),
             getenv('DB_ENDPOINTSCATALOG_USER'),
