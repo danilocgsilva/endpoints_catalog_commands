@@ -23,10 +23,10 @@ final class RollbackMigrateCommand extends CommandTemplate
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->connect();
+        $this->connectMRollback();
         
         try {
-            $this->pdo->prepare($this->migrations->getRollbackSql())->execute();
+            $this->pdo->prepare($this->migrations->getString())->execute();
 
             $output->writeln("Rollback done");
     

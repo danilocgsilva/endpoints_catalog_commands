@@ -14,13 +14,30 @@ trait ConnectTrait
 
     protected PDO $pdo;
 
-    protected function connect()
+    protected function connectMigrate(): void
     {
         $migrationManager = new MigrationManager();
 
         $nextMigrationName = $migrationManager->getNextMigrationClass();
         
         $this->migrations = new $nextMigrationName;
+
+        $this->connect();
+    }
+
+    protected function connectMRollback(): void
+    {
+        $migrationManager = new MigrationManager();
+
+        $previousMigrationName = $migrationManager->getPreviouseMigrationClass();
+        
+        $this->migrations = new $previousMigrationName;
+
+        $this->connect();
+    }
+
+    private function connect(): void
+    {
         $this->pdo = new PDO(
             sprintf("mysql:host=%s;dbname=%s", getenv('DB_ENDPOINTSCATALOG_HOST'), getenv('DB_ENDPOINTSCATALOG_NAME')),
             getenv('DB_ENDPOINTSCATALOG_USER'),

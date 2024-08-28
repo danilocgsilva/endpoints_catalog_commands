@@ -23,7 +23,7 @@ final class MigrateCommand extends CommandTemplate
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->connect();
+        $this->connectMigrate();
         
         try {
             $this->pdo->prepare($this->migrations->getString())->execute();
