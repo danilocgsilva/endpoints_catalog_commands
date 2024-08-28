@@ -16,24 +16,18 @@ trait ConnectTrait
 
     protected function connectMigrate(): void
     {
-        $migrationManager = new MigrationManager();
-
-        $nextMigrationName = $migrationManager->getNextMigrationClass();
-        
-        $this->migrations = new $nextMigrationName;
-
         $this->connect();
+        $migrationManager = new MigrationManager($this->pdo);
+        $nextMigrationName = $migrationManager->getNextMigrationClass();
+        $this->migrations = new $nextMigrationName;
     }
 
     protected function connectMRollback(): void
     {
-        $migrationManager = new MigrationManager();
-
-        $previousMigrationName = $migrationManager->getPreviouseMigrationClass();
-        
-        $this->migrations = new $previousMigrationName;
-
         $this->connect();
+        $migrationManager = new MigrationManager($this->pdo);
+        $previousMigrationName = $migrationManager->getPreviouseMigrationClass();
+        $this->migrations = new $previousMigrationName;
     }
 
     private function connect(): void
