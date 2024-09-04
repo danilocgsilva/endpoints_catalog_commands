@@ -38,15 +38,27 @@ class AddDescriptionToDnsCommand extends CommandTemplate
         /** @var array<Dns> */
         $optionsObjs = $dnsRepository->list();
 
-        $optionsString = array_map(fn ($entry) => $entry->dns, $optionsObjs);
+        $reKeyDnsOptions = [];
+        $optionsDnsStrings = [];
+        foreach ($optionsObjs as $dnsObject) {
+            $reKeyDnsOptions[] = $dnsObject;
+            $optionDnsString = $dnsObject->dns;
+            if (isset($dnsObject->description)) {
+                $optionDnsString .= " (Description: {$dnsObject->description})";
+            }
+            $optionsDnsStrings[] = $optionDnsString;
+        }
 
         $choice = $helper->ask($input, $output, new ChoiceQuestion(
             'Selection the DNS to set a description',
-            $optionsString
+            $optionsDnsStrings
         ));
 
-        /** @var Dns $objectChoosed */
-        $objectChoosed = array_values(array_filter($optionsObjs, fn ($entry) => $entry->dns === $choice))[0];
+        $stringChoosed = array_filter($optionsDnsStrings, fn ($optionString) => $optionString === $choice);
+
+        $choosedKey = array_keys($stringChoosed)[0];
+
+        $objectChoosed = $reKeyDnsOptions[$choosedKey];
 
         $descriptionFromUser = $this->getAskAnswer('Write a description');
 
