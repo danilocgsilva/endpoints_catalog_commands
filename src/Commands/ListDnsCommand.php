@@ -30,7 +30,11 @@ class ListDnsCommand extends CommandTemplate
             $dnsRepository = new DnsRepository($this->pdo);
             foreach ($dnsRepository->list() as $dns) {
                 $dnsString = $dns->dns;
-                $output->writeln("* {$dnsString}");
+                $stringToWrite = "* {$dnsString}";
+                if (isset($dns->description)) {
+                    $stringToWrite .= " - {$dns->description}";
+                }
+                $output->writeln($stringToWrite);
             }
             
             return 0;
