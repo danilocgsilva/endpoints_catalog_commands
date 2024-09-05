@@ -26,7 +26,7 @@ final class RollbackMigrateCommand extends CommandTemplate
         $this->connectMRollback();
         
         try {
-            $this->pdo->prepare($this->migrations->getString())->execute();
+            $this->pdo->prepare($this->migrations->getRollbackString())->execute();
 
             $output->writeln("Rollback done");
     
