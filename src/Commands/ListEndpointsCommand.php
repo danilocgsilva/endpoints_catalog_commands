@@ -31,21 +31,8 @@ class ListEndpointsCommand extends CommandTemplate
         $this->connect();
         
         try {
-            $dnsPathRepository = new DnsPathRepository($this->pdo);
-            $pathRepository = new PathRepository($this->pdo);
-            $dnsRepository = new DnsRepository($this->pdo);
+            $endpointsStrings = $this->getEndpointsList();
 
-            $endpointsStrings = [];
-            foreach ($dnsPathRepository->list() as $dnsPathEntry) {
-                $endpointString = (new EndpointService(
-                    $dnsRepository->get($dnsPathEntry->dns_id),
-                    $pathRepository->get($dnsPathEntry->path_id)
-                ))->getEndpointString();
-
-                $endpointsStrings[] = " * https://" . $endpointString;
-            }
-
-            usort($endpointsStrings, fn ($first, $second) => strcmp($first, $second));
             foreach ($endpointsStrings as $endpointString) {
                 $output->writeln($endpointString);
             }
@@ -54,5 +41,26 @@ class ListEndpointsCommand extends CommandTemplate
         } catch (\Throwable $exception) {
             return $this->caughtException($exception, $output);
         }
+    }
+
+    private function getEndpointsList(): array
+    {
+        $dnsPathRepository = new DnsPathRepository($this->pdo);
+        $pathRepository = new PathRepository($this->pdo);
+        $dnsRepository = new DnsRepository($this->pdo);
+
+        $endpointsStrings = [];
+        foreach ($dnsPathRepository->list() as $dnsPathEntry) {
+            $endpointString = (new EndpointService(
+                $dnsRepository->get($dnsPathEntry->dns_id),
+                $pathRepository->get($dnsPathEntry->path_id)
+            ))->getEndpointString();
+
+            $endpointsStrings[] = " * https://" . $endpointString;
+        }
+
+        usort($endpointsStrings, fn ($first, $second) => strcmp($first, $second));
+
+        return $endpointsStrings;
     }
 }

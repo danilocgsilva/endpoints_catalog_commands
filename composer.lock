@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "danilocgsilva/class_to_sql_schema_script",
-            "version": "1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilocgsilva/class_to_sql_schema_script.git",
-                "reference": "9133b8008a3dbac9002bb631788b57c1ae3184b9"
+                "reference": "15337e12294c97decaf12e8ea84203678878eee8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilocgsilva/class_to_sql_schema_script/zipball/9133b8008a3dbac9002bb631788b57c1ae3184b9",
-                "reference": "9133b8008a3dbac9002bb631788b57c1ae3184b9",
+                "url": "https://api.github.com/repos/danilocgsilva/class_to_sql_schema_script/zipball/15337e12294c97decaf12e8ea84203678878eee8",
+                "reference": "15337e12294c97decaf12e8ea84203678878eee8",
                 "shasum": ""
             },
             "require-dev": {
@@ -41,22 +41,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danilocgsilva/class_to_sql_schema_script/issues",
-                "source": "https://github.com/danilocgsilva/class_to_sql_schema_script/tree/1.8.0"
+                "source": "https://github.com/danilocgsilva/class_to_sql_schema_script/tree/1.9.0"
             },
-            "time": "2024-08-26T20:25:16+00:00"
+            "time": "2024-09-05T17:47:39+00:00"
         },
         {
             "name": "danilocgsilva/endpoints_catalog",
-            "version": "2.2.4",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilocgsilva/endpoints_catalog.git",
-                "reference": "d0ac936e1672d13de96c76a3c36dc31a18bc12e3"
+                "reference": "e9d9a105ae870212f82d8f45b14eb38b8898edab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilocgsilva/endpoints_catalog/zipball/d0ac936e1672d13de96c76a3c36dc31a18bc12e3",
-                "reference": "d0ac936e1672d13de96c76a3c36dc31a18bc12e3",
+                "url": "https://api.github.com/repos/danilocgsilva/endpoints_catalog/zipball/e9d9a105ae870212f82d8f45b14eb38b8898edab",
+                "reference": "e9d9a105ae870212f82d8f45b14eb38b8898edab",
                 "shasum": ""
             },
             "require": {
@@ -83,9 +83,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilocgsilva/endpoints_catalog/issues",
-                "source": "https://github.com/danilocgsilva/endpoints_catalog/tree/2.2.4"
+                "source": "https://github.com/danilocgsilva/endpoints_catalog/tree/2.3.3"
             },
-            "time": "2024-09-04T17:13:09+00:00"
+            "time": "2024-09-06T19:49:36+00:00"
         },
         {
             "name": "laravel/serializable-closure",
