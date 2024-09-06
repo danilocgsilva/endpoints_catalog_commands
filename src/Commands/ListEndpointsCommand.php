@@ -34,13 +34,22 @@ class ListEndpointsCommand extends CommandTemplate
             $dnsPathRepository = new DnsPathRepository($this->pdo);
             $pathRepository = new PathRepository($this->pdo);
             $dnsRepository = new DnsRepository($this->pdo);
+
+            $endpointsStrings = [];
             foreach ($dnsPathRepository->list() as $dnsPathEntry) {
                 $endpointString = (new EndpointService(
                     $dnsRepository->get($dnsPathEntry->dns_id),
                     $pathRepository->get($dnsPathEntry->path_id)
                 ))->getEndpointString();
-                $output->writeln(" * " . $endpointString);
+
+                $endpointsStrings[] = " * https://" . $endpointString;
             }
+
+            usort($endpointsStrings, fn ($first, $second) => strcmp($first, $second));
+            foreach ($endpointsStrings as $endpointString) {
+                $output->writeln($endpointString);
+            }
+
             return 0;
         } catch (\Throwable $exception) {
             return $this->caughtException($exception, $output);

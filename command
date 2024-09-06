@@ -5,7 +5,8 @@ declare(strict_types=1);
 use Danilocgsilva\EndpointsCatalogCommands\Commands\{
     MigrateCommand, RollbackMigrateCommand, SetEndpointCommand,
     ListPathsCommand, ListDnsCommand, AddDnsCommand,
-    AddPathCommand, ListEndpointsCommand, AddDescriptionToDnsCommand
+    AddPathCommand, ListEndpointsCommand, AddDescriptionToDnsCommand,
+    RenamePathCommand
 };
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
@@ -49,6 +50,7 @@ try {
         ->add(SetEndpointCommand::class)
         ->add(ListEndpointsCommand::class)
         ->add(AddDescriptionToDnsCommand::class)
+        ->add(RenamePathCommand::class)
     ;
 
     exit($application->run());

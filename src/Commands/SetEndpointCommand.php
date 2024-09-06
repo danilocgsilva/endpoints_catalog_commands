@@ -32,8 +32,7 @@ class SetEndpointCommand extends CommandTemplate
         try {
             $helper = $this->getHelper('question');
             
-            $dnss = $this->getDnss();
-            $dnssOptions = $this->getDnssStrings($dnss);
+            $dnssOptions = $this->getDnssStrings();
 
             $questionDns = new ChoiceQuestion(
                 'Select the dns to compose the endpoint.',
@@ -82,9 +81,9 @@ class SetEndpointCommand extends CommandTemplate
      * @param array<Dns> $dnss
      * @return array<string>
      */
-    private function getDnssStrings(array $dnss): array
+    private function getDnssStrings(): array
     {
-        return array_map(fn ($entry) => $entry->dns, $dnss);
+        return array_map(fn ($entry) => $entry->dns, $this->getDnss());
     }
 
     /**
