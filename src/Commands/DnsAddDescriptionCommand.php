@@ -13,7 +13,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Danilocgsilva\EndpointsCatalog\Repositories\DnsRepository;
 use Danilocgsilva\EndpointsCatalog\Models\Dns;
 
-class AddDescriptionToDnsCommand extends CommandTemplate
+class DnsAddDescriptionCommand extends CommandTemplate
 {
     use ConnectTrait;
     use AskTrait;
@@ -22,7 +22,7 @@ class AddDescriptionToDnsCommand extends CommandTemplate
     {
         parent::configure();
 
-        $this->setName('add-description-dns');
+        $this->setName('dns:add-description');
         $this->setDescription('Add a description to the dns.');
     }
 

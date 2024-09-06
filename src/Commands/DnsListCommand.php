@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Danilocgsilva\EndpointsCatalog\Repositories\DnsRepository;
 
-class ListDnsCommand extends CommandTemplate
+class DnsListCommand extends CommandTemplate
 {
     use ConnectTrait;
 
@@ -18,7 +18,7 @@ class ListDnsCommand extends CommandTemplate
     {
         parent::configure();
 
-        $this->setName('list-dns');
+        $this->setName('dns:list');
         $this->setDescription('List dns');
     }
 
