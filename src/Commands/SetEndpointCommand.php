@@ -56,7 +56,7 @@ class SetEndpointCommand extends CommandTemplate
             $output->writeln('You selected as dns: ' . $dnsChoice);
             $output->writeln('You selected as path: ' . $pathChoice);
 
-            $choosenDnsObject = $this->pickDns($dnsChoice, $dnss);
+            $choosenDnsObject = $this->pickDns($dnsChoice, $this->getDnss());
             $choosenPathObject = $this->pickPath($pathChoice, $paths);
 
             $dnsPathRepository = new DnsPathRepository($this->pdo);
