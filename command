@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use Danilocgsilva\EndpointsCatalogCommands\Commands\{
     MigrateCommand, RollbackMigrateCommand, SetEndpointCommand,
-    ListPathsCommand, ListDnsCommand, AddDnsCommand,
-    AddPathCommand, ListEndpointsCommand, AddDescriptionToDnsCommand,
+    ListPathsCommand, DnsListCommand, AddDnsCommand,
+    AddPathCommand, ListEndpointsCommand, DnsAddDescriptionCommand,
     RenamePathCommand, RemoveEndpointCommand
 };
 use DI\ContainerBuilder;
@@ -45,11 +45,11 @@ try {
         ->add(RollbackMigrateCommand::class)
         ->add(ListPathsCommand::class)
         ->add(AddDnsCommand::class)
-        ->add(ListDnsCommand::class)
+        ->add(DnsListCommand::class)
         ->add(AddPathCommand::class)
         ->add(SetEndpointCommand::class)
         ->add(ListEndpointsCommand::class)
-        ->add(AddDescriptionToDnsCommand::class)
+        ->add(DnsAddDescriptionCommand::class)
         ->add(RenamePathCommand::class)
         ->add(RemoveEndpointCommand::class)
     ;
