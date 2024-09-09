@@ -6,32 +6,30 @@ namespace Danilocgsilva\EndpointsCatalogCommands\Commands;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Danilocgsilva\EndpointsCatalogCommands\CommandTemplate;
-use Danilocgsilva\EndpointsCatalogCommands\ConnectTrait;
+use Danilocgsilva\EndpointsCatalogCommands\{CommandTemplate, ConnectTrait};
+use Throwable;
 
-final class MigrateCommand extends CommandTemplate
+final class MigrateShowsPreviousMigrationClassCommand extends CommandTemplate
 {
     use ConnectTrait;
-
+    
     protected function configure(): void
     {
         parent::configure();
 
-        $this->setName('migrate');
-        $this->setDescription('Do a database migration.');
+        $this->setName('migrate:shows-rollback-migration-class');
+        $this->setDescription('Shows the next class to make a rollback.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->connectMigrate();
+        $this->connectMRollback();
         
         try {
-            $this->pdo->prepare($this->migrations->getString())->execute();
-            
-            $output->writeln("Migration applied!");
+            $output->writeln(get_class($this->migrations));
     
             return 0;
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             return $this->caughtException($exception, $output);
         }
     }

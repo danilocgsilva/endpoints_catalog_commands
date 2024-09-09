@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Danilocgsilva\EndpointsCatalogCommands\{CommandTemplate, ConnectTrait};
 use Throwable;
 
-final class RollbackMigrateCommand extends CommandTemplate
+final class MigrateRollbackCommand extends CommandTemplate
 {
     use ConnectTrait;
     
@@ -17,7 +17,7 @@ final class RollbackMigrateCommand extends CommandTemplate
     {
         parent::configure();
 
-        $this->setName('rollback-migrate');
+        $this->setName('migrate:rollback');
         $this->setDescription('Do a rollback database migration.');
     }
 
